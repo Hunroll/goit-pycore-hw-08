@@ -1,4 +1,4 @@
-from task import *
+from Bot import *
 
 global test_count, successfull_count, test_name
 def assert_eq(a, b, comment: str):
@@ -70,6 +70,11 @@ def test4():
     #set birthday for John
     john.add_birthday("03.08.1995")
     assert_eq(str(book.find("John")), "Contact name: John, birthday: 03.08.1995, phones: 1112223333; 5555555555", "John\'s birthday is added")
+
+    book.save_data("testbook.dat")
+    book = AddressBook.load_data("testbook.dat")
+    assert_eq(str(book.find("John")), "Contact name: John, birthday: 03.08.1995, phones: 1112223333; 5555555555", "Book is loaded from file")
+
 
     jane = book.find("Jane")
     jane.add_birthday("02.01.1995")
